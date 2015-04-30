@@ -8,15 +8,27 @@
 
 import UIKit
 
-class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
 
     @IBOutlet weak var image: UIImageView!
     @IBOutlet weak var albumButton: UIBarButtonItem!                                    // There might be no need for this property!
     @IBOutlet weak var cameraButton: UIBarButtonItem!
+    @IBOutlet weak var topTextField: UITextField!
+    @IBOutlet weak var bottomTextField: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        // Set textFields default texts
+        topTextField.text = "TOP"
+        bottomTextField.text = "BOTTOM"
+        
+        // Define UITextFieldDelegate
+        topTextField.delegate = self
+        bottomTextField.delegate = self
+        
+        // Text Fields should initially be hidden
+        topTextField.hidden = true
+        bottomTextField.hidden = true
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -30,7 +42,9 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     @IBAction func pickAnImageFromAlbum(sender: UIBarButtonItem) {
 
         let imagePicker = UIImagePickerController()
+        // Define UIImagePickerControllerDelegate
         imagePicker.delegate = self
+        
         imagePicker.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
 
         self.presentViewController(imagePicker, animated: true, completion: nil)
@@ -39,6 +53,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     @IBAction func pickAnImageFromCamera(sender: UIBarButtonItem) {
 
         let imagePicker = UIImagePickerController()
+        // Define UIIMagePickerControllerDelegate
         imagePicker.delegate = self
         imagePicker.sourceType = UIImagePickerControllerSourceType.Camera
 
@@ -55,6 +70,10 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
             self.image.image = image
+            
+            // Text Fields should now be not hidden
+            topTextField.hidden = false
+            bottomTextField.hidden = false
         }
     }
     
@@ -63,5 +82,15 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         self.dismissViewControllerAnimated(true, completion: nil)
     }
 
+    /* UITextFieldDelegate methods (2) */
+    
+    func textFieldDidBeginEditing(textField: UITextField) {
+        textField.text = ""
+    }
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
 }
 

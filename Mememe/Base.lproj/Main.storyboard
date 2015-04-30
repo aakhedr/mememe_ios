@@ -17,6 +17,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fcI-Ju-Oc9">
+                                <rect key="frame" x="165" y="165" width="270" height="270"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="270" id="wLF-AB-ENr"/>
+                                </constraints>
+                            </imageView>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rXJ-Xq-o0k">
+                                <rect key="frame" x="288" y="395" width="26" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="yes" spellCheckingType="yes"/>
+                            </textField>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gzN-gW-Y6R">
                                 <rect key="frame" x="0.0" y="556" width="600" height="44"/>
                                 <items>
@@ -32,27 +43,32 @@
                                     </barButtonItem>
                                 </items>
                             </toolbar>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fcI-Ju-Oc9">
-                                <rect key="frame" x="165" y="165" width="270" height="270"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="270" id="wLF-AB-ENr"/>
-                                </constraints>
-                            </imageView>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="333-e1-76U">
+                                <rect key="frame" x="288" y="172" width="26" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="yes" spellCheckingType="yes"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="fcI-Ju-Oc9" firstAttribute="top" secondItem="333-e1-76U" secondAttribute="bottom" constant="-37" id="1y0-np-e3a"/>
                             <constraint firstItem="fcI-Ju-Oc9" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="145" id="1yM-oX-FQu"/>
                             <constraint firstItem="gzN-gW-Y6R" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-16" id="UMX-dN-oi2"/>
                             <constraint firstItem="gzN-gW-Y6R" firstAttribute="top" secondItem="fcI-Ju-Oc9" secondAttribute="bottom" constant="121" id="b3e-Yq-oLw"/>
+                            <constraint firstAttribute="centerX" secondItem="rXJ-Xq-o0k" secondAttribute="centerX" constant="-0.5" id="bps-s0-dPN"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="gzN-gW-Y6R" secondAttribute="bottom" id="eTW-UF-UhE"/>
+                            <constraint firstAttribute="centerX" secondItem="333-e1-76U" secondAttribute="centerX" constant="-0.5" id="fbx-MX-xaz"/>
                             <constraint firstAttribute="centerX" secondItem="fcI-Ju-Oc9" secondAttribute="centerX" id="lTb-rN-d0C"/>
+                            <constraint firstItem="rXJ-Xq-o0k" firstAttribute="top" secondItem="fcI-Ju-Oc9" secondAttribute="bottom" constant="-40" id="waU-rq-OQT"/>
                             <constraint firstAttribute="trailingMargin" secondItem="gzN-gW-Y6R" secondAttribute="trailing" constant="-16" id="zIB-Ck-6LB"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="albumButton" destination="9Ld-t9-1V2" id="QQs-92-RCp"/>
+                        <outlet property="bottomTextField" destination="rXJ-Xq-o0k" id="m0P-Yc-8SF"/>
                         <outlet property="cameraButton" destination="W1e-T4-WYI" id="U4P-uZ-Wuk"/>
                         <outlet property="image" destination="fcI-Ju-Oc9" id="IPh-Qs-nQr"/>
+                        <outlet property="topTextField" destination="333-e1-76U" id="n9n-Ku-D5o"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
