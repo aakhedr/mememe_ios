@@ -25,10 +25,11 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         // Define UITextFieldDelegate
         topTextField.delegate = self
         bottomTextField.delegate = self
+
         
-        // Text Fields should initially be hidden
-        topTextField.hidden = true
-        bottomTextField.hidden = true
+        // Set the default textFields attributes
+        topTextField.defaultTextAttributes = memeTextAttributes
+        bottomTextField.defaultTextAttributes = memeTextAttributes
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -38,10 +39,10 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
 
     /* UIImagePickerControllerDelegate methods (2) */
     /* Note: UIImageControllerDelegate has to conform with UINavigationController */
-    
     @IBAction func pickAnImageFromAlbum(sender: UIBarButtonItem) {
 
         let imagePicker = UIImagePickerController()
+
         // Define UIImagePickerControllerDelegate
         imagePicker.delegate = self
         
@@ -53,16 +54,17 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     @IBAction func pickAnImageFromCamera(sender: UIBarButtonItem) {
 
         let imagePicker = UIImagePickerController()
+
         // Define UIIMagePickerControllerDelegate
         imagePicker.delegate = self
+
         imagePicker.sourceType = UIImagePickerControllerSourceType.Camera
 
         self.presentViewController(imagePicker, animated: true, completion: nil)
     }
 
     /* UIImagePickerController methods (2) */
-
-    // In case a user picks an image
+    /* In case a user picks an image */
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
 
         // Dismiss current modal Picker View first!
@@ -70,20 +72,15 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
             self.image.image = image
-            
-            // Text Fields should now be not hidden
-            topTextField.hidden = false
-            bottomTextField.hidden = false
         }
     }
     
-    // In case a user doesn't pick an image                                         // Ther might be no need to implement this!
+    /* In case a user doesn't pick an image                                         // Ther might be no need to implement this! */
     func imagePickerControllerDidCancel(picker: UIImagePickerController) {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
 
     /* UITextFieldDelegate methods (2) */
-    
     func textFieldDidBeginEditing(textField: UITextField) {
         textField.text = ""
     }
@@ -92,5 +89,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         textField.resignFirstResponder()
         return true
     }
+
+    /* Meme textFields attributes */
+    let memeTextAttributes = [ NSStrokeColorAttributeName: UIColor.blackColor(), NSForegroundColorAttributeName: UIColor.whiteColor(), NSFontAttributeName: UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!, NSStrokeWidthAttributeName: 3.0 ]
 }
 
