@@ -15,6 +15,9 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     @IBOutlet weak var cameraButton: UIBarButtonItem!
     @IBOutlet weak var topTextField: UITextField!
     @IBOutlet weak var bottomTextField: UITextField!
+
+    /* Meme textFields attributes */
+    let memeTextAttributes = [ NSStrokeColorAttributeName: UIColor.blackColor(), NSForegroundColorAttributeName: UIColor.whiteColor(), NSFontAttributeName: UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!, NSStrokeWidthAttributeName: 3.0 ]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,6 +38,17 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         cameraButton.enabled = UIImagePickerController.isSourceTypeAvailable(.Camera)
+        
+        // This ViewController subscribes to NSKeybaordWillShowNotifiaction
+        self.subscribeToKeyboardNotifications()
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        
+        super.viewWillDisappear(animated)
+
+        // Now this ViewController unscubscribes from NSKeyboardWillShowNotification
+        self.unsubscribeFromKeyboardNotifications()
     }
 
     /* UIImagePickerControllerDelegate methods (2) */
@@ -75,22 +89,47 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         }
     }
     
-    /* In case a user doesn't pick an image                                         // Ther might be no need to implement this! */
+    /* In case a user doesn't pick an image */                                       // There might be no need to implement this!
     func imagePickerControllerDidCancel(picker: UIImagePickerController) {
+        
         self.dismissViewControllerAnimated(true, completion: nil)
     }
 
     /* UITextFieldDelegate methods (2) */
     func textFieldDidBeginEditing(textField: UITextField) {
+        
         textField.text = ""
     }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
+        
         textField.resignFirstResponder()
         return true
     }
 
-    /* Meme textFields attributes */
-    let memeTextAttributes = [ NSStrokeColorAttributeName: UIColor.blackColor(), NSForegroundColorAttributeName: UIColor.whiteColor(), NSFontAttributeName: UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!, NSStrokeWidthAttributeName: 3.0 ]
+    /* Move the view when the botoomTextField is tabbed (4 methods) */
+
+    func subscribeToKeyboardNotifications() {
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillShow:", name: UIKeyboardWillShowNotification, object: nil)
+    }
+
+    func unsubscribeFromKeyboardNotifications() {
+        
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillShowNotification, object: nil)
+    }
+
+    func keyboardWillShow(notification: NSNotification) {
+        
+        self.view.frame.origin.y -= getKeyboardHeight(notification)
+    }
+    
+    func getKeyboardHeight(notification: NSNotification) -> CGFloat {
+        
+        let userInfo = notification.userInfo
+        let keyboardSize = userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue
+        
+        return keyboardSize.CGRectValue().height
+    }
 }
 
