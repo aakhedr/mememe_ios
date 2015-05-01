@@ -107,16 +107,18 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         return true
     }
 
-    /* Move the view when the botoomTextField is tabbed (4 methods) */
+    /* Move the view when the textFields is tabbed and keybaord shows (4 methods) */
 
     func subscribeToKeyboardNotifications() {
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillShow:", name: UIKeyboardWillShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillHide:", name: UIKeyboardWillHideNotification, object: nil)
     }
 
     func unsubscribeFromKeyboardNotifications() {
         
         NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillHideNotification, object: nil)
     }
 
     func keyboardWillShow(notification: NSNotification) {
@@ -131,5 +133,22 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         
         return keyboardSize.CGRectValue().height
     }
+
+    /* Move the view back when done typing textFields and keyboard disappears (1 extra method) */
+    
+    func keyboardWillHide(notification: NSNotification) {
+        
+        self.view.frame.origin.y += getKeyboardHeight(notification)
+    }
 }
+
+
+
+
+
+
+
+
+
+
 
