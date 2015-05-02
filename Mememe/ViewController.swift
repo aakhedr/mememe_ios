@@ -204,6 +204,9 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     func save() {
         
         var meme = Meme(topText: topTextField.text!, bottomText: bottomTextField.text!, originalImage: image.image!, memedImage: generateMemedImage())
+        
+        // Add the meme to the memes array in the Application Delegate
+        (UIApplication.sharedApplication().delegate as! AppDelegate).memes.append(meme)
     }
 }
 
