@@ -11,6 +11,4 @@ import UIKit
 class MemeCollectionViewCell: UICollectionViewCell {
     
     var meme: Meme!
-    
-    
 }

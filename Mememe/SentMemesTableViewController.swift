@@ -10,22 +10,28 @@ import UIKit
 
 class SentMemesTableViewController: UITableViewController {
     
-    var memes: [Meme]!
+    var memes = [Meme]()
+    @IBOutlet weak var addButton: UIBarButtonItem!
     
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        let applicationDelegate = (UIApplication.sharedApplication().delegate as! AppDelegate)
-        memes = applicationDelegate.memes
-        self.tableView?.reloadData()
-    
-        println(memes.count)
     }
 
     override func viewWillAppear(animated: Bool) {
         
         super.viewWillAppear(animated)
         self.tabBarController!.tabBar.hidden = false
+
+        let applicationDelegate = (UIApplication.sharedApplication().delegate as! AppDelegate)
+        memes = applicationDelegate.memes
+        self.tableView!.reloadData()
+        
+        println("Size of memes array (tableViewController) = \(memes.count)")
+        
+        if memes.count == 0 {
+            performSegueWithIdentifier("addMeme", sender: self.addButton)
+        }
     }
     
     @IBAction func addNewMeme(sender: UIBarButtonItem) {
@@ -34,19 +40,27 @@ class SentMemesTableViewController: UITableViewController {
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
+        println("numberOfRowsInSection is called: \(memes.count)")
         return memes.count
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCellWithIdentifier("tableCell") as! MemeTableViewCell
+        println("cellForRowAtIndexPath is called")
+        
+        let cell = tableView.dequeueReusableCellWithIdentifier("tableCell") as! UITableViewCell
+        
+        println("tableCell = \(cell)")
+        
         let meme = self.memes[indexPath.row]
-        cell.meme = meme
+        cell.imageView?.image = meme.memedImage
         
         return cell
     }
 
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        println("didSelectRowAtIndexPath is called")
         
         let sentMemeController = self.storyboard!.instantiateViewControllerWithIdentifier("SentMemeViewController") as! SentMemeViewController
         sentMemeController.meme = self.memes[indexPath.row]
