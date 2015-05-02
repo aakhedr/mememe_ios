@@ -11,15 +11,18 @@ import UIKit
 class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
 
     @IBOutlet weak var image: UIImageView!
+
     @IBOutlet weak var albumButton: UIBarButtonItem!
     @IBOutlet weak var cameraButton: UIBarButtonItem!
+    
     @IBOutlet weak var topTextField: UITextField!
     @IBOutlet weak var bottomTextField: UITextField!
+    
     @IBOutlet weak var shareButton: UIBarButtonItem!
     @IBOutlet weak var cancelSharingButton: UIBarButtonItem!
     
     /* Meme textFields attributes */
-    let memeTextAttributes = [ NSStrokeColorAttributeName: UIColor.blackColor(), NSForegroundColorAttributeName: UIColor.whiteColor(), NSFontAttributeName: UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!, NSStrokeWidthAttributeName: 3.0 ]
+    let memeTextAttributes = [ NSStrokeColorAttributeName: UIColor.blackColor(), NSForegroundColorAttributeName: UIColor.whiteColor(), NSFontAttributeName: UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!, NSStrokeWidthAttributeName: -3.0 ]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,6 +55,10 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         } else {
             shareButton.enabled = false
         }
+
+        /* REVISIT THIS!!! */
+        // Hide the previous navigation controller tab bar
+        self.navigationController!.tabBarController!.tabBar.hidden = true
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -63,7 +70,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
 
     /* UIImagePickerControllerDelegate methods (2) */
-    /* Note: UIImageControllerDelegate has to conform with UINavigationController */
+    
     @IBAction func pickAnImageFromAlbum(sender: UIBarButtonItem) {
 
         let imagePicker = UIImagePickerController()
@@ -98,15 +105,19 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
 
     func saveMemeAfterSharing(activity: String!, completed: Bool, items: [AnyObject]!, error: NSError!) {
         if completed {
+            println("saveMemeAfterSharing called")
             save()
-            self.dismissViewControllerAnimated(true, completion: nil)
+            dismissViewControllerAnimated(true, completion: nil)
+            /* INSTANTIATE TAB BAR VIEW HERE */
+//            let sentMemesController = self.storyboard!.instantiateViewControllerWithIdentifier("SentMemesTableViewController") as! SentMemesTableViewController
+//            self.presentViewController(sentMemesController, animated: true, completion: nil)
         }
     }
 
-    // NEEDS TO BE REVISITED UPON THE COMPLETTION OF SENT MEMES VIEW
-    @IBAction func CancelSharingMeme(sender: UIBarButtonItem) {
-        
-        self.navigationController?.popToRootViewControllerAnimated(true)
+    @IBAction func cancelSharingMeme(sender: UIBarButtonItem) {
+
+        // There are two navigation controllers (See storyboard!)
+        self.navigationController!.navigationController!.popToRootViewControllerAnimated(true)
     }
     
     /* UIImagePickerController methods (2) */
@@ -128,6 +139,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
 
     /* UITextFieldDelegate methods (2) */
+    
     func textFieldDidBeginEditing(textField: UITextField) {
         
         textField.text = ""
@@ -207,6 +219,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         
         // Add the meme to the memes array in the Application Delegate
         (UIApplication.sharedApplication().delegate as! AppDelegate).memes.append(meme)
+        println((UIApplication.sharedApplication().delegate as! AppDelegate).memes.count)
     }
 }
 
