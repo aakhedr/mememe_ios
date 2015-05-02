@@ -109,8 +109,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             save()
             dismissViewControllerAnimated(true, completion: nil)
             /* INSTANTIATE TAB BAR VIEW HERE */
-//            let sentMemesController = self.storyboard!.instantiateViewControllerWithIdentifier("SentMemesTableViewController") as! SentMemesTableViewController
-//            self.presentViewController(sentMemesController, animated: true, completion: nil)
+            self.navigationController!.navigationController!.popToRootViewControllerAnimated(true)
         }
     }
 

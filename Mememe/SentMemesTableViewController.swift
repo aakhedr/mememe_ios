@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SentMemesTableViewController: UITableViewController, UITableViewDataSource {
+class SentMemesTableViewController: UITableViewController {
     
     var memes: [Meme]!
     
@@ -17,6 +17,8 @@ class SentMemesTableViewController: UITableViewController, UITableViewDataSource
         super.viewDidLoad()
         let applicationDelegate = (UIApplication.sharedApplication().delegate as! AppDelegate)
         memes = applicationDelegate.memes
+        self.tableView?.reloadData()
+    
         println(memes.count)
     }
 

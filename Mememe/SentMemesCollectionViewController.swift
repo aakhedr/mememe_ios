@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SentMemesCollectionViewController: UICollectionViewController, UICollectionViewDataSource {
+class SentMemesCollectionViewController: UICollectionViewController, UICollectionViewDataSource, UICollectionViewDelegate {
     
     var memes: [Meme]!
     
@@ -17,6 +17,7 @@ class SentMemesCollectionViewController: UICollectionViewController, UICollectio
         super.viewDidLoad()
         let applicationDelegate = (UIApplication.sharedApplication().delegate as! AppDelegate)
         memes = applicationDelegate.memes
+        self.collectionView?.reloadData()
     }
 
     override func viewWillAppear(animated: Bool) {
