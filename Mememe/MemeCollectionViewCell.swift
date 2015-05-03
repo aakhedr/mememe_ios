@@ -2,7 +2,7 @@
 //  MemeCollectionViewCell.swift
 //  Mememe
 //
-//  Created by Ahmed Khedr on 5/2/15.
+//  Created by Ahmed Khedr on 5/3/15.
 //  Copyright (c) 2015 Ahmed Khedr. All rights reserved.
 //
 
@@ -10,5 +10,5 @@ import UIKit
 
 class MemeCollectionViewCell: UICollectionViewCell {
     
-    var meme: Meme!
+    @IBOutlet weak var memedImage: UIImageView!
 }

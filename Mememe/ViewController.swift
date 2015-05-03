@@ -52,8 +52,10 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         // In case no image is picked disable shareButton
         if let iamge = image.image {
             shareButton.enabled = true
+            cancelSharingButton.enabled = true
         } else {
             shareButton.enabled = false
+            cancelSharingButton.enabled = false
         }
 
         /* REVISIT THIS!!! */

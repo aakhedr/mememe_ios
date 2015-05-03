@@ -37,7 +37,7 @@ class SentMemesTableViewController: UITableViewController {
     @IBAction func addNewMeme(sender: UIBarButtonItem) {
         performSegueWithIdentifier("addMeme", sender: sender)
     }
-
+    
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         println("numberOfRowsInSection is called: \(memes.count)")
@@ -53,7 +53,11 @@ class SentMemesTableViewController: UITableViewController {
         println("tableCell = \(cell)")
         
         let meme = self.memes[indexPath.row]
-        cell.imageView?.image = meme.memedImage
+        cell.imageView!.image = meme.memedImage
+        cell.imageView!.sizeToFit()
+        
+        cell.textLabel!.text = meme.topText
+        cell.detailTextLabel!.text = meme.bottomText
         
         return cell
     }

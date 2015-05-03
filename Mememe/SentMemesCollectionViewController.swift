@@ -48,11 +48,12 @@ class SentMemesCollectionViewController: UICollectionViewController {
         
         println("cellForItemAtIndexPath called")
         
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("collectionCell", forIndexPath: indexPath) as! UICollectionViewCell
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("MemeCollectionViewCell", forIndexPath: indexPath) as! MemeCollectionViewCell
         
-        println("collectionCell = \(cell)")
+        println("collectionCell = \(cell.description)")
         
         let meme = memes[indexPath.row]
+        cell.memedImage.image = meme.memedImage
         
         return cell
     }
