@@ -25,12 +25,12 @@
                                     <constraint firstAttribute="width" constant="568" id="hRx-64-u2M"/>
                                 </constraints>
                             </imageView>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="333-e1-76U">
-                                <rect key="frame" x="288" y="112" width="25" height="30"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="333-e1-76U">
+                                <rect key="frame" x="288" y="87" width="25" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters" autocorrectionType="yes" spellCheckingType="yes"/>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="rXJ-Xq-o0k">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="rXJ-Xq-o0k">
                                 <rect key="frame" x="288" y="511" width="25" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters" autocorrectionType="yes" spellCheckingType="yes"/>
@@ -38,7 +38,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="fcI-Ju-Oc9" firstAttribute="top" secondItem="333-e1-76U" secondAttribute="bottom" constant="-70" id="AYH-hZ-Bsc"/>
+                            <constraint firstItem="fcI-Ju-Oc9" firstAttribute="top" secondItem="333-e1-76U" secondAttribute="bottom" constant="-45" id="AYH-hZ-Bsc"/>
                             <constraint firstAttribute="centerX" secondItem="fcI-Ju-Oc9" secondAttribute="centerX" id="Emn-eh-dsm"/>
                             <constraint firstAttribute="centerY" secondItem="fcI-Ju-Oc9" secondAttribute="centerY" constant="-14" id="bDV-kW-xYG"/>
                             <constraint firstAttribute="centerX" secondItem="rXJ-Xq-o0k" secondAttribute="centerX" constant="-0.5" id="bps-s0-dPN"/>
