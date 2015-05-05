@@ -30,12 +30,17 @@ class SentMemesTableViewController: UITableViewController {
         println("Size of memes array (tableViewController) = \(memes.count)")
         
         if memes.count == 0 {
-            performSegueWithIdentifier("addMeme", sender: self.addButton)
+            addNewMeme(addButton)
         }
     }
     
     @IBAction func addNewMeme(sender: UIBarButtonItem) {
         performSegueWithIdentifier("addMeme", sender: sender)
+        
+        /* REVISIT THIS!!! */
+        // Hide the previous navigation controller tab bar
+        self.tabBarController!.tabBar.hidden = true
+
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -53,8 +58,8 @@ class SentMemesTableViewController: UITableViewController {
         println("tableCell = \(cell)")
         
         let meme = self.memes[indexPath.row]
-        cell.imageView!.image = meme.memedImage
-        cell.imageView!.sizeToFit()
+        cell.imageView?.image = meme.memedImage
+        cell.imageView?.sizeToFit()
         
         cell.textLabel!.text = meme.topText
         cell.detailTextLabel!.text = meme.bottomText

@@ -12,6 +12,7 @@ class SentMemesCollectionViewController: UICollectionViewController {
     
     var memes = [Meme]()
     @IBOutlet weak var addButton: UIBarButtonItem!
+    @IBOutlet weak var editButton: UIBarButtonItem!
 
     override func viewDidLoad() {
         
@@ -28,14 +29,9 @@ class SentMemesCollectionViewController: UICollectionViewController {
         self.collectionView!.reloadData()
         
         println("Size of memes array (collectionViewController)= \(memes.count)")
-        
-        if memes.count == 0 {
-            performSegueWithIdentifier("addMeme", sender: self.addButton)
-        }
     }
 
-    @IBAction func addNewMeme(sender: UIBarButtonItem) {
-        performSegueWithIdentifier("addMeme", sender: sender)
+    @IBAction func deleteAMeme(sender: UIBarButtonItem) {
     }
     
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -65,4 +61,6 @@ class SentMemesCollectionViewController: UICollectionViewController {
         sentMemeController.meme = self.memes[indexPath.row]
         self.navigationController!.pushViewController(sentMemeController, animated: true)
     }
+    
+
 }

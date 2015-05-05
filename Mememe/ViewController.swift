@@ -21,26 +21,30 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     @IBOutlet weak var shareButton: UIBarButtonItem!
     @IBOutlet weak var cancelSharingButton: UIBarButtonItem!
     
+    let textFieldDelegate = TextFieldDelegate()
+    let clearButtonMode = UITextFieldViewMode.WhileEditing
+
     /* Meme textFields attributes */
     let memeTextAttributes = [ NSStrokeColorAttributeName: UIColor.blackColor(), NSForegroundColorAttributeName: UIColor.whiteColor(), NSFontAttributeName: UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!, NSStrokeWidthAttributeName: 3.0 ]
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Set textFields default texts
-        topTextField.text = "TOP"
-        bottomTextField.text = "BOTTOM"
         
         // Define UITextFieldDelegate
-        topTextField.delegate = self
-        bottomTextField.delegate = self
+        topTextField.delegate = textFieldDelegate
+        bottomTextField.delegate = textFieldDelegate
 
-        
         // Set the default textFields attributes
         topTextField.defaultTextAttributes = memeTextAttributes
         bottomTextField.defaultTextAttributes = memeTextAttributes
+        
+        topTextField.text = "TOP"
+        bottomTextField.text = "BOTTOM"
+        
+        topTextField.clearButtonMode = self.clearButtonMode
+        bottomTextField.clearButtonMode = self.clearButtonMode
     }
-    
+
     override func viewWillAppear(animated: Bool) {
 
         super.viewWillAppear(animated)
@@ -55,10 +59,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         } else {
             shareButton.enabled = false
         }
-
-        /* REVISIT THIS!!! */
-        // Hide the previous navigation controller tab bar
-        self.navigationController!.tabBarController!.tabBar.hidden = true
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -68,8 +68,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         // Now this ViewController unscubscribes from NSKeyboardWillShowNotification
         self.unsubscribeFromKeyboardNotifications()
     }
-
-    /* UIImagePickerControllerDelegate methods (2) */
     
     @IBAction func pickAnImageFromAlbum(sender: UIBarButtonItem) {
 
@@ -79,18 +77,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         imagePicker.delegate = self
         
         imagePicker.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
-
-        self.presentViewController(imagePicker, animated: true, completion: nil)
-    }
-    
-    @IBAction func pickAnImageFromCamera(sender: UIBarButtonItem) {
-
-        let imagePicker = UIImagePickerController()
-
-        // Define UIIMagePickerControllerDelegate
-        imagePicker.delegate = self
-
-        imagePicker.sourceType = UIImagePickerControllerSourceType.Camera
 
         self.presentViewController(imagePicker, animated: true, completion: nil)
     }
@@ -118,7 +104,12 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     @IBAction func cancelSharingMeme(sender: UIBarButtonItem) {
 
         // There are two navigation controllers (See storyboard!)
-        self.navigationController!.navigationController!.popToRootViewControllerAnimated(true)
+        if (UIApplication.sharedApplication().delegate as! AppDelegate).memes.count > 0 {
+            self.navigationController!.navigationController!.popToRootViewControllerAnimated(true)
+        } else {
+            self.image.image = nil
+            self.shareButton.enabled = false
+        }
     }
     
     /* UIImagePickerController methods (2) */
@@ -138,20 +129,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         
         self.dismissViewControllerAnimated(true, completion: nil)
     }
-
-    /* UITextFieldDelegate methods (2) */
     
-    func textFieldDidBeginEditing(textField: UITextField) {
-        
-        textField.text = ""
-    }
-    
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
-        
-        textField.resignFirstResponder()
-        return true
-    }
-
     /* Move the view when the textFields is tabbed and keybaord shows (4 methods) */
 
     func subscribeToKeyboardNotifications() {
@@ -196,6 +174,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
 
     /* Talk to the model */
+
     /* Prepare teh memedImage first */
     func generateMemedImage() -> UIImage {
         
