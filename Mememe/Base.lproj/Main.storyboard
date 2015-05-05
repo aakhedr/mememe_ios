@@ -202,21 +202,16 @@
                         </connections>
                     </collectionView>
                     <navigationItem key="navigationItem" title="Sent Memes" id="s2n-7f-Pyd">
-                        <barButtonItem key="leftBarButtonItem" title="Edit" id="SOl-bb-qXx">
-                            <connections>
-                                <action selector="deleteAMeme:" destination="4AB-zs-r4V" id="Trq-pF-uMo"/>
-                            </connections>
-                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="43T-we-81X">
                             <connections>
-                                <action selector="addNewMeme:" destination="4AB-zs-r4V" id="xod-Vf-iGY"/>
+                                <action selector="addNewMeme:" destination="4AB-zs-r4V" id="Ilm-lT-LAk"/>
                                 <segue destination="CZQ-8F-4Py" kind="show" identifier="addMeme" id="tcs-Zh-5kL"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="addButton" destination="43T-we-81X" id="ESf-7w-r2e"/>
-                        <outlet property="editButton" destination="SOl-bb-qXx" id="QWj-qF-3lo"/>
+                        <outlet property="collectionView" destination="rqt-Ib-7tm" id="Spf-78-ksd"/>
                     </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="l3e-6H-bkV" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -276,7 +271,6 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Sent Memes" id="Egp-4Q-dmG">
-                        <barButtonItem key="leftBarButtonItem" title="Edit" id="AMH-fW-yvE"/>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="XyG-Ki-w8U">
                             <connections>
                                 <action selector="addNewMeme:" destination="UO3-lN-DGu" id="wAB-wM-82O"/>
@@ -286,15 +280,17 @@
                     </navigationItem>
                     <connections>
                         <outlet property="addButton" destination="XyG-Ki-w8U" id="Uff-F9-zJe"/>
+                        <outlet property="tableView" destination="rtj-Bm-qYv" id="BIn-sB-3Iy"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0Zk-4d-bJE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="182" y="-273"/>
+            <point key="canvasLocation" x="91" y="-296"/>
         </scene>
         <!--Item-->
         <scene sceneID="T6V-U8-DvI">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="QSz-4l-4CA" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" toolbarHidden="NO" id="CZQ-8F-4Py" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="Re2-oc-hiu"/>
                     <toolbarItems/>
@@ -310,7 +306,6 @@
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="Eiy-sy-h8q"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="QSz-4l-4CA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="910" y="140"/>
         </scene>
@@ -339,6 +334,6 @@
         <image name="table" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="tcs-Zh-5kL"/>
+        <segue reference="FBO-Ri-ehM"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -8,27 +8,30 @@
 
 import UIKit
 
-class SentMemesTableViewController: UITableViewController {
-    
-    var memes = [Meme]()
+class SentMemesTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+
+    @IBOutlet var tableView: UITableView!
     @IBOutlet weak var addButton: UIBarButtonItem!
     
+    var memes = [Meme]()
+
     override func viewDidLoad() {
-        
         super.viewDidLoad()
+        
+        // Add edit button
+        self.navigationItem.leftBarButtonItem = self.editButtonItem()
     }
 
     override func viewWillAppear(animated: Bool) {
-        
         super.viewWillAppear(animated)
         self.tabBarController!.tabBar.hidden = false
 
-        let applicationDelegate = (UIApplication.sharedApplication().delegate as! AppDelegate)
-        memes = applicationDelegate.memes
+        memes = (UIApplication.sharedApplication().delegate as! AppDelegate).memes
+
+        // Reload table data and configure the table view cell height
         self.tableView!.reloadData()
-        
-        println("Size of memes array (tableViewController) = \(memes.count)")
-        
+        self.tableView!.rowHeight = 100
+
         if memes.count == 0 {
             addNewMeme(addButton)
         }
@@ -40,22 +43,15 @@ class SentMemesTableViewController: UITableViewController {
         /* REVISIT THIS!!! */
         // Hide the previous navigation controller tab bar
         self.tabBarController!.tabBar.hidden = true
-
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        println("numberOfRowsInSection is called: \(memes.count)")
+    /********** UITableViewDelegate and UITableViewDataSource methods (3) **************/
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return memes.count
     }
 
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        
-        println("cellForRowAtIndexPath is called")
-        
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("tableCell") as! UITableViewCell
-        
-        println("tableCell = \(cell)")
         
         let meme = self.memes[indexPath.row]
         cell.imageView?.image = meme.memedImage
@@ -67,12 +63,37 @@ class SentMemesTableViewController: UITableViewController {
         return cell
     }
 
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        
-        println("didSelectRowAtIndexPath is called")
-        
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let sentMemeController = self.storyboard!.instantiateViewControllerWithIdentifier("SentMemeViewController") as! SentMemeViewController
         sentMemeController.meme = self.memes[indexPath.row]
         self.navigationController!.pushViewController(sentMemeController, animated: true)
+    }
+
+    // Delete row
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+
+        if editingStyle == UITableViewCellEditingStyle.Delete {
+            self.memes.removeAtIndex(indexPath.row)
+            // Remove item from the model!
+            (UIApplication.sharedApplication().delegate as! AppDelegate).memes.removeAtIndex(indexPath.row)
+            self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+            self.tableView!.reloadData()
+        }
+    }
+
+    // Move a row to another location index
+    func tableView(tableView: UITableView, moveRowAtIndexPath sourceIndexPath: NSIndexPath, toIndexPath destinationIndexPath: NSIndexPath) {
+        let item = self.memes.removeAtIndex(sourceIndexPath.row)
+        (UIApplication.sharedApplication().delegate as! AppDelegate).memes.removeAtIndex(sourceIndexPath.row)
+        
+        // Keep the model array sorted as the UITableView class property
+        self.memes.insert(item, atIndex: destinationIndexPath.row)
+        (UIApplication.sharedApplication().delegate as! AppDelegate).memes.insert(item, atIndex: destinationIndexPath.row)
+    }
+
+    /* This superclass method gets called by the table view and has to be overrided the subclass property tableView needs to override it */
+    override func setEditing(editing: Bool, animated: Bool) {
+        super.setEditing(editing, animated: animated)
+        self.tableView!.setEditing(editing, animated: animated)
     }
 }

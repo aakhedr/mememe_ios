@@ -10,17 +10,14 @@ import UIKit
 
 class TextFieldDelegate: NSObject, UITextFieldDelegate {
 
-    /* UITextFieldDelegate methods (2) */
-    
+    /************** UITextFieldDelegate methods (2) *************/
     func textFieldDidBeginEditing(textField: UITextField) {
-        
         if textField.text == "TOP" || textField.text == "BOTTOM" {
             textField.text = ""
         }
     }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
-        
         textField.resignFirstResponder()
         return true
     }

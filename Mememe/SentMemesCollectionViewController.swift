@@ -8,45 +8,49 @@
 
 import UIKit
 
-class SentMemesCollectionViewController: UICollectionViewController {
+class SentMemesCollectionViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
+    
+    @IBOutlet var collectionView: UICollectionView!
+    @IBOutlet weak var addButton: UIBarButtonItem!
     
     var memes = [Meme]()
-    @IBOutlet weak var addButton: UIBarButtonItem!
-    @IBOutlet weak var editButton: UIBarButtonItem!
 
     override func viewDidLoad() {
-        
         super.viewDidLoad()
+        
+        // Add edit button
+        self.navigationItem.leftBarButtonItem = self.editButtonItem()
     }
 
     override func viewWillAppear(animated: Bool) {
-        
         super.viewWillAppear(animated)
         self.tabBarController!.tabBar.hidden = false
 
-        let applicationDelegate = (UIApplication.sharedApplication().delegate as! AppDelegate)
-        memes = applicationDelegate.memes
+        memes = (UIApplication.sharedApplication().delegate as! AppDelegate).memes
+
+        // Reload collection data
         self.collectionView!.reloadData()
         
-        println("Size of memes array (collectionViewController)= \(memes.count)")
+        if memes.count == 0 {
+            addNewMeme(addButton)
+        }
     }
 
-    @IBAction func deleteAMeme(sender: UIBarButtonItem) {
-    }
-    
-    override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    @IBAction func addNewMeme(sender: UIBarButtonItem) {
+        performSegueWithIdentifier("addMeme", sender: sender)
         
-        println("numberOfItemsInSection is called: \(memes.count)")
+        /* REVISIT THIS!!! */
+        // Hide the previous navigation controller tab bar
+        self.tabBarController!.tabBar.hidden = true
+    }
+
+    /*********** UICollectionViewDelegate and UICollectionViewDataSource methods (3) ****/
+    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return memes.count
     }
 
-    override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        
-        println("cellForItemAtIndexPath called")
-        
+    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("MemeCollectionViewCell", forIndexPath: indexPath) as! MemeCollectionViewCell
-        
-        println("collectionCell = \(cell.description)")
         
         let meme = memes[indexPath.row]
         cell.memedImage.image = meme.memedImage
@@ -54,13 +58,9 @@ class SentMemesCollectionViewController: UICollectionViewController {
         return cell
     }
     
-    override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        
-        println("didSelectItemAtIndexPath called")
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         let sentMemeController = self.storyboard!.instantiateViewControllerWithIdentifier("SentMemeViewController") as! SentMemeViewController
         sentMemeController.meme = self.memes[indexPath.row]
         self.navigationController!.pushViewController(sentMemeController, animated: true)
     }
-    
-
 }

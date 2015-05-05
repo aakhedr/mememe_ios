@@ -41,12 +41,12 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         topTextField.text = "TOP"
         bottomTextField.text = "BOTTOM"
         
+        // Add clear (x) button
         topTextField.clearButtonMode = self.clearButtonMode
         bottomTextField.clearButtonMode = self.clearButtonMode
     }
 
     override func viewWillAppear(animated: Bool) {
-
         super.viewWillAppear(animated)
         cameraButton.enabled = UIImagePickerController.isSourceTypeAvailable(.Camera)
         
@@ -62,7 +62,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     override func viewWillDisappear(animated: Bool) {
-        
         super.viewWillDisappear(animated)
 
         // Now this ViewController unscubscribes from NSKeyboardWillShowNotification
@@ -70,7 +69,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     @IBAction func pickAnImageFromAlbum(sender: UIBarButtonItem) {
-
         let imagePicker = UIImagePickerController()
 
         // Define UIImagePickerControllerDelegate
@@ -82,27 +80,13 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
 
     @IBAction func shareMeme(sender: UIBarButtonItem) {
-        
         let memedImage = generateMemedImage()
         let activityController = UIActivityViewController(activityItems: [memedImage], applicationActivities: nil)
         activityController.completionWithItemsHandler = saveMemeAfterSharing
         self.presentViewController(activityController, animated: true, completion: nil)
     }
 
-    func saveMemeAfterSharing(activity: String!, completed: Bool, items: [AnyObject]!, error: NSError!) {
-        if completed {
-            
-            println("saveMemeAfterSharing called")
-
-            save()
-            dismissViewControllerAnimated(true, completion: nil)
-            // There are two navigation controllers (See storyboard!)
-            self.navigationController!.navigationController!.popToRootViewControllerAnimated(true)
-        }
-    }
-
     @IBAction func cancelSharingMeme(sender: UIBarButtonItem) {
-
         // There are two navigation controllers (See storyboard!)
         if (UIApplication.sharedApplication().delegate as! AppDelegate).memes.count > 0 {
             self.navigationController!.navigationController!.popToRootViewControllerAnimated(true)
@@ -112,72 +96,58 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         }
     }
     
-    /* UIImagePickerController methods (2) */
+    /******************************* UIImagePickerController methods (2) ************************/
     /* In case a user picks an image */
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
-
         // Dismiss current modal Picker View first!
         self.dismissViewControllerAnimated(true, completion: nil)
-        
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
             self.image.image = image
         }
     }
     
-    /* In case a user doesn't pick an image */                                       // There might be no need to implement this!
+    /* In case a user doesn't pick an image */
     func imagePickerControllerDidCancel(picker: UIImagePickerController) {
-        
         self.dismissViewControllerAnimated(true, completion: nil)
     }
-    
-    /* Move the view when the textFields is tabbed and keybaord shows (4 methods) */
 
+    /********* Move the view when the textFields is tabbed and keybaord shows (4 methods) *********/
     func subscribeToKeyboardNotifications() {
-        
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillShow:", name: UIKeyboardWillShowNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillHide:", name: UIKeyboardWillHideNotification, object: nil)
     }
 
     func unsubscribeFromKeyboardNotifications() {
-        
         NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillShowNotification, object: nil)
         NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillHideNotification, object: nil)
     }
 
     func keyboardWillShow(notification: NSNotification) {
-        
         self.view.frame.origin.y -= getKeyboardHeight(notification)
     }
     
     func getKeyboardHeight(notification: NSNotification) -> CGFloat {
-        
         // Claculate keyboard height only if editing bottomTextField
         if bottomTextField.editing {
-            
             let userInfo = notification.userInfo
             let keyboardSize = userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue
         
             return keyboardSize.CGRectValue().height
             
         } else {
-            
             // Otherwise do not move view up (editing topTextField)
             return 0
         }
     }
 
-    /* Move the view back when done typing textFields and keyboard disappears (1 extra method) */
-    
+    /**** Move the view back when done typing textFields and keyboard disappears (1 extra method) ****/
     func keyboardWillHide(notification: NSNotification) {
-        
         self.view.frame.origin.y += getKeyboardHeight(notification)
     }
 
-    /* Talk to the model */
-
+    /************************** Talk to the model *************************/
     /* Prepare teh memedImage first */
     func generateMemedImage() -> UIImage {
-        
         // Hide toolbar and navbar
         self.navigationController?.setToolbarHidden(true, animated: true)
         self.navigationController?.setNavigationBarHidden(true, animated: true)
@@ -194,12 +164,19 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     func save() {
-        
         var meme = Meme(topText: topTextField.text!, bottomText: bottomTextField.text!, originalImage: image.image!, memedImage: generateMemedImage())
         
         // Add the meme to the memes array in the Application Delegate
         (UIApplication.sharedApplication().delegate as! AppDelegate).memes.append(meme)
-        
-        println((UIApplication.sharedApplication().delegate as! AppDelegate).memes.count)
+    }
+
+    func saveMemeAfterSharing(activity: String!, completed: Bool, items: [AnyObject]!, error: NSError!) {
+        if completed {
+            save()
+            dismissViewControllerAnimated(true, completion: nil)
+            
+            // There are two navigation controllers (See storyboard!)
+            self.navigationController!.navigationController!.popToRootViewControllerAnimated(true)
+        }
     }
 }
