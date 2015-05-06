@@ -102,6 +102,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         if (UIApplication.sharedApplication().delegate as! AppDelegate).memes.count > 0 {
             let tabBarVC = self.storyboard!.instantiateViewControllerWithIdentifier("TabBarController") as! UITabBarController
             self.navigationController!.popToRootViewControllerAnimated(true)
+            self.dismissViewControllerAnimated(true, completion: nil)
+
         } else {
             self.image.image = nil
             self.shareButton.enabled = false
