@@ -31,18 +31,18 @@ class SentMemesTableViewController: UIViewController, UITableViewDataSource, UIT
         // Reload table data and configure the table view cell height
         self.tableView!.reloadData()
         self.tableView!.rowHeight = 100
-
-        if memes.count == 0 {
-            addNewMeme(addButton)
+    }
+    
+    // Move to the meme editor (ViewController) in case no memes are saved!
+    override func viewDidAppear(animated: Bool) {
+        if self.memes.count == 0 {
+            let memeEditorNavigationController = self.storyboard!.instantiateViewControllerWithIdentifier("memeEditorNC") as! UINavigationController
+            self.presentViewController(memeEditorNavigationController, animated: true, completion: nil)
         }
     }
     
     @IBAction func addNewMeme(sender: UIBarButtonItem) {
         performSegueWithIdentifier("addMeme", sender: sender)
-        
-        /* REVISIT THIS!!! */
-        // Hide the previous navigation controller tab bar
-//        self.tabBarController!.tabBar.hidden = true
     }
     
     /********** UITableViewDelegate and UITableViewDataSource methods (3) **************/

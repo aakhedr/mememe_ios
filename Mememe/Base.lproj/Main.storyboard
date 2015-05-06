@@ -205,7 +205,7 @@
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="43T-we-81X">
                             <connections>
                                 <action selector="addNewMeme:" destination="4AB-zs-r4V" id="Ilm-lT-LAk"/>
-                                <segue destination="CZQ-8F-4Py" kind="show" identifier="addMeme" id="tcs-Zh-5kL"/>
+                                <segue destination="CZQ-8F-4Py" kind="presentation" identifier="addMeme" modalPresentationStyle="fullScreen" id="tcs-Zh-5kL"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -274,7 +274,7 @@
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="XyG-Ki-w8U">
                             <connections>
                                 <action selector="addNewMeme:" destination="UO3-lN-DGu" id="wAB-wM-82O"/>
-                                <segue destination="CZQ-8F-4Py" kind="show" identifier="addMeme" id="FBO-Ri-ehM"/>
+                                <segue destination="CZQ-8F-4Py" kind="presentation" identifier="addMeme" modalPresentationStyle="fullScreen" id="FBO-Ri-ehM"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -290,7 +290,7 @@
         <!--Item-->
         <scene sceneID="T6V-U8-DvI">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" toolbarHidden="NO" id="CZQ-8F-4Py" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="memeEditorNC" automaticallyAdjustsScrollViewInsets="NO" toolbarHidden="NO" id="CZQ-8F-4Py" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="Re2-oc-hiu"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="LRK-3k-9Kx">
@@ -312,7 +312,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="JnH-ET-eAX">
             <objects>
-                <tabBarController id="lUr-GG-Pe0" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="TabBarController" id="lUr-GG-Pe0" sceneMemberID="viewController">
                     <nil key="simulatedBottomBarMetrics"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="sXh-lP-XpW">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
@@ -334,6 +334,6 @@
         <image name="table" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="FBO-Ri-ehM"/>
+        <segue reference="tcs-Zh-5kL"/>
     </inferredMetricsTieBreakers>
 </document>

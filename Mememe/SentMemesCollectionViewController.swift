@@ -20,9 +20,6 @@ class SentMemesCollectionViewController: UIViewController, UICollectionViewDataS
         
         // Add edit button
         self.navigationItem.leftBarButtonItem = self.editButtonItem()
-
-        // Reload collection data
-        self.collectionView!.reloadData()
     }
 
     override func viewWillAppear(animated: Bool) {
@@ -31,19 +28,12 @@ class SentMemesCollectionViewController: UIViewController, UICollectionViewDataS
 
         memes = (UIApplication.sharedApplication().delegate as! AppDelegate).memes
         
-        if memes.count == 0 {
-            addNewMeme(addButton)
-        }
         // Reload collection data
         self.collectionView!.reloadData()
     }
 
     @IBAction func addNewMeme(sender: UIBarButtonItem) {
         performSegueWithIdentifier("addMeme", sender: sender)
-
-        /* REVISIT THIS!!! */
-        // Hide the previous navigation controller tab bar
-//        self.tabBarController!.tabBar.hidden = true
     }
 
     /*********** UICollectionViewDelegate and UICollectionViewDataSource methods (3) ****/

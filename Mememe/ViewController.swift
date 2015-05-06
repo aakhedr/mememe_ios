@@ -100,7 +100,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     @IBAction func cancelSharingMeme(sender: UIBarButtonItem) {
         // There are two navigation controllers (See storyboard!)
         if (UIApplication.sharedApplication().delegate as! AppDelegate).memes.count > 0 {
-            self.navigationController!.navigationController!.popToRootViewControllerAnimated(true)
+            let tabBarVC = self.storyboard!.instantiateViewControllerWithIdentifier("TabBarController") as! UITabBarController
+            self.navigationController!.popToRootViewControllerAnimated(true)
         } else {
             self.image.image = nil
             self.shareButton.enabled = false
@@ -184,10 +185,9 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     func saveMemeAfterSharing(activity: String!, completed: Bool, items: [AnyObject]!, error: NSError!) {
         if completed {
             save()
+            let tabBatVC = self.storyboard!.instantiateViewControllerWithIdentifier("TabBarController") as! UITabBarController
+            self.navigationController!.popToRootViewControllerAnimated(true)
             dismissViewControllerAnimated(true, completion: nil)
-            
-            // There are two navigation controllers (See storyboard!)
-            self.navigationController!.navigationController!.popToRootViewControllerAnimated(true)
         }
     }
 }
