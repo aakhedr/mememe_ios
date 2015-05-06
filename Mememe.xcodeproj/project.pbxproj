@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		360C69241AF68F110079BB5F /* MemeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 360C69231AF68F110079BB5F /* MemeCollectionViewCell.swift */; };
+		361B1AE11AFA7931002A9074 /* LaunchImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 361B1AE01AFA7931002A9074 /* LaunchImage.png */; };
 		365852441AF5139D00E009F4 /* SentMemeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 365852431AF5139D00E009F4 /* SentMemeViewController.swift */; };
 		365EB6421AF92FE100DB9E7A /* TextFieldDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 365EB6411AF92FE100DB9E7A /* TextFieldDelegate.swift */; };
 		368816A21AF2493600258414 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 368816A11AF2493600258414 /* AppDelegate.swift */; };
@@ -33,6 +34,7 @@
 
 /* Begin PBXFileReference section */
 		360C69231AF68F110079BB5F /* MemeCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemeCollectionViewCell.swift; sourceTree = "<group>"; };
+		361B1AE01AFA7931002A9074 /* LaunchImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LaunchImage.png; sourceTree = "<group>"; };
 		365852431AF5139D00E009F4 /* SentMemeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SentMemeViewController.swift; sourceTree = "<group>"; };
 		365EB6411AF92FE100DB9E7A /* TextFieldDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldDelegate.swift; sourceTree = "<group>"; };
 		3688169C1AF2493600258414 /* Mememe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Mememe.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -108,6 +110,7 @@
 		3688169F1AF2493600258414 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				361B1AE01AFA7931002A9074 /* LaunchImage.png */,
 				368816A01AF2493600258414 /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -210,6 +213,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				361B1AE11AFA7931002A9074 /* LaunchImage.png in Resources */,
 				368816A71AF2493600258414 /* Main.storyboard in Resources */,
 				368816AC1AF2493600258414 /* LaunchScreen.xib in Resources */,
 				368816A91AF2493600258414 /* Images.xcassets in Resources */,
