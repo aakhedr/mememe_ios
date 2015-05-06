@@ -204,6 +204,12 @@
                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="mbY-Qa-i3q">
                                             <rect key="frame" x="8" y="8" width="131" height="100"/>
                                         </imageView>
+                                        <button opaque="NO" tag="100" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pum-gK-aIR">
+                                            <rect key="frame" x="127" y="0.0" width="20" height="22"/>
+                                            <state key="normal" image="close">
+                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                        </button>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
@@ -215,6 +221,7 @@
                                 </constraints>
                                 <connections>
                                     <outlet property="memedImage" destination="mbY-Qa-i3q" id="Yju-Dr-8J5"/>
+                                    <outlet property="xButton" destination="pum-gK-aIR" id="zC7-dG-CJ4"/>
                                 </connections>
                             </collectionViewCell>
                         </cells>
@@ -224,6 +231,11 @@
                         </connections>
                     </collectionView>
                     <navigationItem key="navigationItem" title="Sent Memes" id="s2n-7f-Pyd">
+                        <barButtonItem key="leftBarButtonItem" title="Edit" id="L0W-90-7At">
+                            <connections>
+                                <action selector="editMeme:" destination="4AB-zs-r4V" id="jub-3y-Ute"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="43T-we-81X">
                             <connections>
                                 <action selector="addNewMeme:" destination="4AB-zs-r4V" id="Ilm-lT-LAk"/>
@@ -293,6 +305,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Sent Memes" id="Egp-4Q-dmG">
+                        <barButtonItem key="leftBarButtonItem" systemItem="edit" id="ycu-W9-HHi"/>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="XyG-Ki-w8U">
                             <connections>
                                 <action selector="addNewMeme:" destination="UO3-lN-DGu" id="wAB-wM-82O"/>
@@ -352,6 +365,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="close" width="256" height="256"/>
         <image name="collection" width="30" height="30"/>
         <image name="table" width="30" height="30"/>
     </resources>

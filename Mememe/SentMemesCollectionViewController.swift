@@ -17,9 +17,6 @@ class SentMemesCollectionViewController: UIViewController, UICollectionViewDataS
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Add edit button
-        self.navigationItem.leftBarButtonItem = self.editButtonItem()
     }
 
     override func viewWillAppear(animated: Bool) {
@@ -28,6 +25,7 @@ class SentMemesCollectionViewController: UIViewController, UICollectionViewDataS
 
         memes = (UIApplication.sharedApplication().delegate as! AppDelegate).memes
         
+        self.collectionView!.backgroundColor = UIColor.whiteColor()
         // Reload collection data
         self.collectionView!.reloadData()
     }
@@ -47,6 +45,17 @@ class SentMemesCollectionViewController: UIViewController, UICollectionViewDataS
         let meme = memes[indexPath.row]
         cell.memedImage.image = meme.memedImage
         
+        // Keep the x button always hidden unless editing
+        if self.navigationItem.leftBarButtonItem!.title == "Edit" {
+            cell.xButton!.hidden = true
+        } else {
+            cell.xButton!.hidden = false
+        }
+        
+        /* Pass the meme index to delete */
+        cell.xButton!.layer.setValue(indexPath.row, forKey: "index")
+        cell.xButton!.addTarget(self, action: "deleteMeme:", forControlEvents: UIControlEvents.TouchUpInside)
+        
         return cell
     }
     
@@ -55,4 +64,43 @@ class SentMemesCollectionViewController: UIViewController, UICollectionViewDataS
         sentMemeController.meme = self.memes[indexPath.row]
         self.navigationController!.pushViewController(sentMemeController, animated: true)
     }
+
+    /******** Activating the edit button to delete memes from the collection view **********/
+    /* Manage the view */
+    @IBAction func editMeme(sender: UIBarButtonItem) {
+        if self.navigationItem.leftBarButtonItem!.title == "Edit" {
+            self.navigationItem.leftBarButtonItem!.title = "Done"
+
+            // Get all cells that user will tab x on
+            for item in self.collectionView!.visibleCells() as! [MemeCollectionViewCell] {
+                let index = self.collectionView!.indexPathForCell(item as MemeCollectionViewCell)
+                let cell = self.collectionView!.cellForItemAtIndexPath(index!) as! MemeCollectionViewCell
+                
+                // The (x) clear button
+                let xButton = cell.viewWithTag(100) as! UIButton
+                xButton.hidden = false
+            }
+        } else {
+            self.navigationItem.leftBarButtonItem!.title = "Edit"
+            self.collectionView!.reloadData()
+        }
+    }
+    
+    /* Actual delete */
+    func deleteMeme(sender: UIButton) {
+        let index = sender.layer.valueForKey("index") as! Int
+        // Delete from the collection view
+        self.memes.removeAtIndex(index)
+        // Delete from the model
+        (UIApplication.sharedApplication().delegate as! AppDelegate).memes.removeAtIndex(index)
+        self.collectionView!.reloadData()
+    }
 }
+
+
+
+
+
+
+
+
