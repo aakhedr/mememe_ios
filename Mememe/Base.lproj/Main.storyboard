@@ -50,7 +50,7 @@
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="i75-V4-myY"/>
                         <barButtonItem systemItem="camera" id="95a-Bj-fJF">
                             <connections>
-                                <action selector="pickAnImageFromCamera:" destination="BYZ-38-t0r" id="gA7-sm-TR7"/>
+                                <action selector="pickAnImageFromCamera:" destination="BYZ-38-t0r" id="RXb-6N-XPJ"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="joz-o7-CI2"/>
@@ -216,7 +216,7 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="l3e-6H-bkV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="182" y="461"/>
+            <point key="canvasLocation" x="97" y="461"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="rO4-Lj-ots">
@@ -285,12 +285,11 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0Zk-4d-bJE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="91" y="-296"/>
+            <point key="canvasLocation" x="97" y="-273"/>
         </scene>
         <!--Item-->
         <scene sceneID="T6V-U8-DvI">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="QSz-4l-4CA" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" toolbarHidden="NO" id="CZQ-8F-4Py" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="Re2-oc-hiu"/>
                     <toolbarItems/>
@@ -306,6 +305,7 @@
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="Eiy-sy-h8q"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="QSz-4l-4CA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="910" y="140"/>
         </scene>

@@ -79,6 +79,17 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         self.presentViewController(imagePicker, animated: true, completion: nil)
     }
 
+    @IBAction func pickAnImageFromCamera(sender: UIBarButtonItem) {
+        let imagePicker = UIImagePickerController()
+        
+        // Define UIImagePickerControllerDelegate
+        imagePicker.delegate = self
+        
+        imagePicker.sourceType = UIImagePickerControllerSourceType.Camera
+        
+        self.presentViewController(imagePicker, animated: true, completion: nil)
+    }
+    
     @IBAction func shareMeme(sender: UIBarButtonItem) {
         let memedImage = generateMemedImage()
         let activityController = UIActivityViewController(activityItems: [memedImage], applicationActivities: nil)
