@@ -96,11 +96,3 @@ class SentMemesCollectionViewController: UIViewController, UICollectionViewDataS
         self.collectionView!.reloadData()
     }
 }
-
-
-
-
-
-
-
-

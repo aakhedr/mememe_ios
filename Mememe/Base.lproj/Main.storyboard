@@ -32,28 +32,36 @@
                                 </variation>
                             </imageView>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="333-e1-76U">
-                                <rect key="frame" x="297" y="119" width="8" height="15"/>
+                                <rect key="frame" x="114" y="104" width="372" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="QRg-9Q-Qal"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters" autocorrectionType="yes" spellCheckingType="yes"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="rXJ-Xq-o0k">
-                                <rect key="frame" x="297" y="486" width="8" height="15"/>
+                                <rect key="frame" x="114" y="486" width="372" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="DRC-lH-5H4"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters" autocorrectionType="yes" spellCheckingType="yes"/>
                             </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="333-e1-76U" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="98" id="2sl-0A-JSE"/>
+                            <constraint firstItem="333-e1-76U" firstAttribute="trailing" secondItem="rXJ-Xq-o0k" secondAttribute="trailing" id="3Hn-BJ-UWG"/>
                             <constraint firstItem="fcI-Ju-Oc9" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="5FA-xr-DQi"/>
-                            <constraint firstItem="fcI-Ju-Oc9" firstAttribute="top" secondItem="333-e1-76U" secondAttribute="bottom" constant="-70" id="AYH-hZ-Bsc"/>
                             <constraint firstAttribute="centerX" secondItem="fcI-Ju-Oc9" secondAttribute="centerX" id="Emn-eh-dsm"/>
+                            <constraint firstItem="333-e1-76U" firstAttribute="centerX" secondItem="fcI-Ju-Oc9" secondAttribute="centerX" id="WBX-Q7-h6i"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="rXJ-Xq-o0k" secondAttribute="bottom" constant="40" id="ZWe-YA-PJV"/>
                             <constraint firstAttribute="centerY" secondItem="fcI-Ju-Oc9" secondAttribute="centerY" constant="-14" id="bDV-kW-xYG"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="fcI-Ju-Oc9" secondAttribute="bottom" id="bgm-S0-4Sl"/>
-                            <constraint firstAttribute="centerX" secondItem="rXJ-Xq-o0k" secondAttribute="centerX" constant="-0.5" id="bps-s0-dPN"/>
                             <constraint firstItem="fcI-Ju-Oc9" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="enF-1k-Ark"/>
-                            <constraint firstAttribute="centerX" secondItem="333-e1-76U" secondAttribute="centerX" constant="-0.5" id="fbx-MX-xaz"/>
+                            <constraint firstItem="333-e1-76U" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="40" id="g56-Wo-hk1"/>
                             <constraint firstItem="fcI-Ju-Oc9" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="pw0-qk-q9m"/>
-                            <constraint firstItem="rXJ-Xq-o0k" firstAttribute="top" secondItem="fcI-Ju-Oc9" secondAttribute="bottom" constant="-70" id="y1b-Ya-vnq"/>
+                            <constraint firstItem="333-e1-76U" firstAttribute="leading" secondItem="rXJ-Xq-o0k" secondAttribute="leading" id="vaa-qu-MLm"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
