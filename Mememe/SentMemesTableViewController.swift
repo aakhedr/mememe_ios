@@ -42,7 +42,7 @@ class SentMemesTableViewController: UIViewController, UITableViewDataSource, UIT
         
         /* REVISIT THIS!!! */
         // Hide the previous navigation controller tab bar
-        self.tabBarController!.tabBar.hidden = true
+//        self.tabBarController!.tabBar.hidden = true
     }
     
     /********** UITableViewDelegate and UITableViewDataSource methods (3) **************/
