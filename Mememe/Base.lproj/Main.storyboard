@@ -201,12 +201,18 @@
                                     <rect key="frame" x="0.0" y="0.0" width="147" height="116"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mbY-Qa-i3q">
-                                            <rect key="frame" x="8" y="8" width="100" height="100"/>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="mbY-Qa-i3q">
+                                            <rect key="frame" x="8" y="8" width="131" height="100"/>
                                         </imageView>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
+                                <constraints>
+                                    <constraint firstItem="mbY-Qa-i3q" firstAttribute="leading" secondItem="Vg0-sG-tIq" secondAttribute="leadingMargin" id="Fgx-5a-rIS"/>
+                                    <constraint firstItem="mbY-Qa-i3q" firstAttribute="top" secondItem="Vg0-sG-tIq" secondAttribute="topMargin" id="VKZ-Si-BKE"/>
+                                    <constraint firstAttribute="bottomMargin" secondItem="mbY-Qa-i3q" secondAttribute="bottom" id="jyB-r7-Wxk"/>
+                                    <constraint firstItem="mbY-Qa-i3q" firstAttribute="trailing" secondItem="Vg0-sG-tIq" secondAttribute="trailingMargin" id="xVX-6a-bSq"/>
+                                </constraints>
                                 <connections>
                                     <outlet property="memedImage" destination="mbY-Qa-i3q" id="Yju-Dr-8J5"/>
                                 </connections>
