@@ -18,15 +18,21 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fcI-Ju-Oc9">
-                                <rect key="frame" x="16" y="72" width="568" height="484"/>
+                                <rect key="frame" x="16" y="64" width="568" height="492"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="484" id="5Td-Yi-hYD"/>
                                     <constraint firstAttribute="width" constant="568" id="hRx-64-u2M"/>
                                 </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="5Td-Yi-hYD"/>
+                                        <exclude reference="hRx-64-u2M"/>
+                                    </mask>
+                                </variation>
                             </imageView>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="333-e1-76U">
-                                <rect key="frame" x="297" y="102" width="8" height="15"/>
+                                <rect key="frame" x="297" y="94" width="8" height="15"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters" autocorrectionType="yes" spellCheckingType="yes"/>
                             </textField>
@@ -38,13 +44,23 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="fcI-Ju-Oc9" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="5FA-xr-DQi"/>
                             <constraint firstItem="fcI-Ju-Oc9" firstAttribute="top" secondItem="333-e1-76U" secondAttribute="bottom" constant="-45" id="AYH-hZ-Bsc"/>
                             <constraint firstAttribute="centerX" secondItem="fcI-Ju-Oc9" secondAttribute="centerX" id="Emn-eh-dsm"/>
                             <constraint firstAttribute="centerY" secondItem="fcI-Ju-Oc9" secondAttribute="centerY" constant="-14" id="bDV-kW-xYG"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="fcI-Ju-Oc9" secondAttribute="bottom" id="bgm-S0-4Sl"/>
                             <constraint firstAttribute="centerX" secondItem="rXJ-Xq-o0k" secondAttribute="centerX" constant="-0.5" id="bps-s0-dPN"/>
+                            <constraint firstItem="fcI-Ju-Oc9" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="enF-1k-Ark"/>
                             <constraint firstAttribute="centerX" secondItem="333-e1-76U" secondAttribute="centerX" constant="-0.5" id="fbx-MX-xaz"/>
+                            <constraint firstItem="fcI-Ju-Oc9" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="pw0-qk-q9m"/>
                             <constraint firstItem="rXJ-Xq-o0k" firstAttribute="top" secondItem="fcI-Ju-Oc9" secondAttribute="bottom" constant="-45" id="y1b-Ya-vnq"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="Emn-eh-dsm"/>
+                                <exclude reference="bDV-kW-xYG"/>
+                            </mask>
+                        </variation>
                     </view>
                     <toolbarItems>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="i75-V4-myY"/>
