@@ -19,6 +19,6 @@ class SentMemeViewController: UIViewController {
         image.image = meme!.memedImage
         
         // Show image in a better way 
-        self.navigationController!.hidesBarsOnTap = true
+        navigationController!.hidesBarsOnTap = true
     }
 }

@@ -19,25 +19,23 @@ class SentMemesTableViewController: UIViewController, UITableViewDataSource, UIT
         super.viewDidLoad()
         
         // Add edit button
-        self.navigationItem.leftBarButtonItem = self.editButtonItem()
+        navigationItem.leftBarButtonItem = self.editButtonItem()
     }
 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        self.tabBarController!.tabBar.hidden = false
-
         memes = (UIApplication.sharedApplication().delegate as! AppDelegate).memes
 
         // Reload table data and configure the table view cell height
-        self.tableView!.reloadData()
-        self.tableView!.rowHeight = 100
+        tableView!.reloadData()
+        tableView!.rowHeight = 100
     }
     
     // Move to the meme editor (ViewController) in case no memes are saved!
     override func viewDidAppear(animated: Bool) {
-        if self.memes.count == 0 {
-            let memeEditorNavigationController = self.storyboard!.instantiateViewControllerWithIdentifier("memeEditorNC") as! UINavigationController
-            self.presentViewController(memeEditorNavigationController, animated: true, completion: nil)
+        if memes.count == 0 {
+            let memeEditorNavigationController = storyboard!.instantiateViewControllerWithIdentifier("memeEditorNC") as! UINavigationController
+            presentViewController(memeEditorNavigationController, animated: true, completion: nil)
         }
     }
     
@@ -64,7 +62,7 @@ class SentMemesTableViewController: UIViewController, UITableViewDataSource, UIT
     }
 
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let sentMemeController = self.storyboard!.instantiateViewControllerWithIdentifier("SentMemeViewController") as! SentMemeViewController
+        let sentMemeController = storyboard!.instantiateViewControllerWithIdentifier("SentMemeViewController") as! SentMemeViewController
         sentMemeController.meme = self.memes[indexPath.row]
         self.navigationController!.pushViewController(sentMemeController, animated: true)
     }
@@ -73,11 +71,11 @@ class SentMemesTableViewController: UIViewController, UITableViewDataSource, UIT
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
 
         if editingStyle == UITableViewCellEditingStyle.Delete {
-            self.memes.removeAtIndex(indexPath.row)
+            memes.removeAtIndex(indexPath.row)
             // Remove item from the model!
             (UIApplication.sharedApplication().delegate as! AppDelegate).memes.removeAtIndex(indexPath.row)
-            self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-            self.tableView!.reloadData()
+            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+            tableView.reloadData()
         }
     }
 
@@ -87,13 +85,13 @@ class SentMemesTableViewController: UIViewController, UITableViewDataSource, UIT
         (UIApplication.sharedApplication().delegate as! AppDelegate).memes.removeAtIndex(sourceIndexPath.row)
         
         // Keep the model array sorted as the UITableView class property
-        self.memes.insert(item, atIndex: destinationIndexPath.row)
+        memes.insert(item, atIndex: destinationIndexPath.row)
         (UIApplication.sharedApplication().delegate as! AppDelegate).memes.insert(item, atIndex: destinationIndexPath.row)
     }
 
     /* This superclass method gets called by the table view and has to be overrided the subclass property tableView needs to override it */
     override func setEditing(editing: Bool, animated: Bool) {
         super.setEditing(editing, animated: animated)
-        self.tableView!.setEditing(editing, animated: animated)
+        tableView!.setEditing(editing, animated: animated)
     }
 }
