@@ -115,10 +115,12 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
 
     @IBAction func cancelSharingMeme(sender: UIBarButtonItem) {
         if (UIApplication.sharedApplication().delegate as! AppDelegate).memes.count > 0 {
-            self.dismissViewControllerAnimated(true, completion: nil)
+            dismissViewControllerAnimated(true, completion: nil)
         } else {
-            self.image.image = nil
-            self.shareButton.enabled = false
+            image.image = nil
+            shareButton.enabled = false
+            topTextField.text = "TOP"
+            bottomTextField.text = "BOTTOM"
         }
     }
     
