@@ -64,7 +64,9 @@ class SentMemesTableViewController: UIViewController, UITableViewDataSource, UIT
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let sentMemeController = storyboard!.instantiateViewControllerWithIdentifier("SentMemeViewController") as! SentMemeViewController
         sentMemeController.meme = self.memes[indexPath.row]
-        self.navigationController!.pushViewController(sentMemeController, animated: true)
+        hidesBottomBarWhenPushed = true
+        navigationController!.pushViewController(sentMemeController, animated: true)
+        hidesBottomBarWhenPushed = false
     }
 
     // Delete row

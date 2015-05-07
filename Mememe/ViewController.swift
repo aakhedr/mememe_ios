@@ -74,11 +74,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         imagePicker.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
         // In case of iPad use UIPopoverController
         if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Pad {
-            imagePicker.modalPresentationStyle = UIModalPresentationStyle.Popover
-            if let popoverController = imagePicker.popoverPresentationController {
-                popoverController.barButtonItem = sender
-                shareButton.enabled = true
-            }
+            shareButton.enabled = true
         }
         presentViewController(imagePicker, animated: true, completion: nil)
     }
@@ -91,10 +87,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         imagePicker.sourceType = UIImagePickerControllerSourceType.Camera
         // In case for iPad use UIPopoverController
         if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Pad {
-            imagePicker.modalPresentationStyle = UIModalPresentationStyle.Popover
-            if let popoverController = imagePicker.popoverPresentationController {
-                popoverController.barButtonItem = sender
-            }
+            shareButton.enabled = true
         }
         presentViewController(imagePicker, animated: true, completion: nil)
     }

@@ -60,7 +60,9 @@ class SentMemesCollectionViewController: UIViewController, UICollectionViewDataS
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         let sentMemeController = storyboard!.instantiateViewControllerWithIdentifier("SentMemeViewController") as! SentMemeViewController
         sentMemeController.meme = self.memes[indexPath.row]
-        self.navigationController!.pushViewController(sentMemeController, animated: true)
+        hidesBottomBarWhenPushed = true
+        navigationController!.pushViewController(sentMemeController, animated: true)
+        hidesBottomBarWhenPushed = false
     }
 
     /******** Activating the edit button to delete memes from the collection view **********/
