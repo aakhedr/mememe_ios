@@ -27,13 +27,23 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     /* Meme textFields attributes */
     let memeTextAttributes = [ NSStrokeColorAttributeName: UIColor.blackColor(), NSForegroundColorAttributeName: UIColor.whiteColor(), NSFontAttributeName: UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!, NSStrokeWidthAttributeName: -3.0 ]
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        // Define UITextFieldDelegate
-        topTextField.delegate = textFieldDelegate
-        bottomTextField.delegate = textFieldDelegate
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        cameraButton.enabled = UIImagePickerController.isSourceTypeAvailable(.Camera)
 
+        // Define UITextFieldDelegate
+        topTextField!.delegate = textFieldDelegate
+        bottomTextField!.delegate = textFieldDelegate
+
+        // This ViewController subscribes to NSKeybaordWillShowNotifiaction
+        subscribeToKeyboardNotifications()
+        
+        // In case no image is picked disable shareButton
+        if let iamge = image.image {
+            shareButton.enabled = true
+        } else {
+            shareButton.enabled = false
+        }
         // Set the default textFields attributes
         topTextField.defaultTextAttributes = memeTextAttributes
         bottomTextField.defaultTextAttributes = memeTextAttributes
@@ -47,21 +57,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         // Add clear (x) button
         topTextField.clearButtonMode = self.clearButtonMode
         bottomTextField.clearButtonMode = self.clearButtonMode
-    }
-
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        cameraButton.enabled = UIImagePickerController.isSourceTypeAvailable(.Camera)
-        
-        // This ViewController subscribes to NSKeybaordWillShowNotifiaction
-        subscribeToKeyboardNotifications()
-        
-        // In case no image is picked disable shareButton
-        if let iamge = image.image {
-            shareButton.enabled = true
-        } else {
-            shareButton.enabled = false
-        }
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -77,6 +72,14 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         // Define UIImagePickerControllerDelegate
         imagePicker.delegate = self
         imagePicker.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
+        // In case of iPad use UIPopoverController
+        if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Pad {
+            imagePicker.modalPresentationStyle = UIModalPresentationStyle.Popover
+            if let popoverController = imagePicker.popoverPresentationController {
+                popoverController.barButtonItem = sender
+                shareButton.enabled = true
+            }
+        }
         presentViewController(imagePicker, animated: true, completion: nil)
     }
 
@@ -86,6 +89,13 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         // Define UIImagePickerControllerDelegate
         imagePicker.delegate = self
         imagePicker.sourceType = UIImagePickerControllerSourceType.Camera
+        // In case for iPad use UIPopoverController
+        if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Pad {
+            imagePicker.modalPresentationStyle = UIModalPresentationStyle.Popover
+            if let popoverController = imagePicker.popoverPresentationController {
+                popoverController.barButtonItem = sender
+            }
+        }
         presentViewController(imagePicker, animated: true, completion: nil)
     }
     
@@ -93,15 +103,19 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         let memedImage = generateMemedImage()
         let activityController = UIActivityViewController(activityItems: [memedImage], applicationActivities: nil)
         activityController.completionWithItemsHandler = saveMemeAfterSharing
+        // In case of iPad use UIPopoverController
+        if UIDevice.currentDevice().userInterfaceIdiom == .Pad {
+            activityController.modalPresentationStyle = UIModalPresentationStyle.Popover
+            if let popoverController = activityController.popoverPresentationController {
+                popoverController.barButtonItem = sender
+            }
+        }
         presentViewController(activityController, animated: true, completion: nil)
     }
 
     @IBAction func cancelSharingMeme(sender: UIBarButtonItem) {
-        // There are two navigation controllers (See storyboard!)
         if (UIApplication.sharedApplication().delegate as! AppDelegate).memes.count > 0 {
-            let tabBarVC = self.storyboard!.instantiateViewControllerWithIdentifier("TabBarController") as! UITabBarController
             self.dismissViewControllerAnimated(true, completion: nil)
-
         } else {
             self.image.image = nil
             self.shareButton.enabled = false
@@ -185,8 +199,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     func saveMemeAfterSharing(activity: String!, completed: Bool, items: [AnyObject]!, error: NSError!) {
         if completed {
             save()
-            let tabBatVC = storyboard!.instantiateViewControllerWithIdentifier("TabBarController") as! UITabBarController
-            self.navigationController!.popToRootViewControllerAnimated(true)
             dismissViewControllerAnimated(true, completion: nil)
         }
     }
