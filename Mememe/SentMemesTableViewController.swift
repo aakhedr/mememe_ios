@@ -53,7 +53,6 @@ class SentMemesTableViewController: UIViewController, UITableViewDataSource, UIT
         
         let meme = self.memes[indexPath.row]
         cell.imageView?.image = meme.memedImage
-        cell.imageView?.sizeToFit()
         
         cell.textLabel!.text = meme.topText
         cell.detailTextLabel!.text = meme.bottomText
