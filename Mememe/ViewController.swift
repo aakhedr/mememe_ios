@@ -72,7 +72,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         // Define UIImagePickerControllerDelegate
         imagePicker.delegate = self
         imagePicker.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
-        // In case of iPad use UIPopoverController
+        // In case of iPad
         if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Pad {
             shareButton.enabled = true
         }
@@ -85,7 +85,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         // Define UIImagePickerControllerDelegate
         imagePicker.delegate = self
         imagePicker.sourceType = UIImagePickerControllerSourceType.Camera
-        // In case for iPad use UIPopoverController
+        // In case for iPad
         if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Pad {
             shareButton.enabled = true
         }

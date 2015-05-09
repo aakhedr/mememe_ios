@@ -13,6 +13,10 @@ class SentMemeViewController: UIViewController {
     @IBOutlet weak var image: UIImageView!
     var meme: Meme!
 
+    override func viewDidLoad() {
+        navigationController!.hidesBarsOnTap = true
+    }
+    
     override func viewWillAppear(animated: Bool) {
         
         super.viewWillAppear(animated)
@@ -20,8 +24,5 @@ class SentMemeViewController: UIViewController {
         
         // Background like the Photos app
         view!.backgroundColor = UIColor.blackColor()
-
-        // Show image in a better way
-        navigationController!.hidesBarsOnTap = true
     }
 }
