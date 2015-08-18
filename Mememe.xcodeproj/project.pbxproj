@@ -97,12 +97,12 @@
 				368816A51AF2493600258414 /* Main.storyboard */,
 				368816A81AF2493600258414 /* Images.xcassets */,
 				368816AA1AF2493600258414 /* LaunchScreen.xib */,
-				3688169F1AF2493600258414 /* Supporting Files */,
 				369DA2841AF4E9C700C96DBC /* SentMemesTableViewController.swift */,
 				368934841AF5AD140031A9FF /* SentMemesCollectionViewController.swift */,
 				365852431AF5139D00E009F4 /* SentMemeViewController.swift */,
 				360C69231AF68F110079BB5F /* MemeCollectionViewCell.swift */,
 				365EB6411AF92FE100DB9E7A /* TextFieldDelegate.swift */,
+				3688169F1AF2493600258414 /* Supporting Files */,
 			);
 			path = Mememe;
 			sourceTree = "<group>";
